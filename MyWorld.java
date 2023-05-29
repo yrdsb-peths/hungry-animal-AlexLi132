@@ -15,6 +15,7 @@ public class MyWorld extends World
      */
     Label scoreLabel;
     public int score = 0;
+    int level = 1;
     public MyWorld()
     {    
         
@@ -27,7 +28,10 @@ public class MyWorld extends World
         // Create a label
         scoreLabel = new Label(0, 80);
         addObject(scoreLabel, 50, 50);
+        
         createApple();
+        createBomb();
+        
     }
     /**
      * End the game
@@ -36,7 +40,8 @@ public class MyWorld extends World
     {
         Label gameOverLabel = new Label("Game Over", 100);
         addObject(gameOverLabel, 300, 200);
-    
+        
+        
     }
     /**
      * increases the score
@@ -45,6 +50,11 @@ public class MyWorld extends World
     {
         score++;
         scoreLabel.setValue(score);
+        
+        if(score % 10 == 0)
+        {
+            level++;
+        }
     }
     /**
      * Create a new apple at a random location
@@ -52,8 +62,20 @@ public class MyWorld extends World
     public void createApple()
     {
         Apple apple = new Apple();
+        apple.setSpeed(level);
         int x = Greenfoot.getRandomNumber(600);
         int y = 0;
         addObject(apple, x, y); 
+        
     }
+    public void createBomb()
+    {
+        Bomb bomb = new Bomb();
+        bomb.setSpeed(level);
+        int x = Greenfoot.getRandomNumber(600);
+        int y = 0;
+        addObject(bomb, x, y); 
+        
+    }
+    
 }

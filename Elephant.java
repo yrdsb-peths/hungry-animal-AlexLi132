@@ -9,11 +9,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Elephant extends Actor
 {
     GreenfootSound elephantSound = new GreenfootSound("gameding.mp3");
+    GreenfootSound bombSound = new GreenfootSound("bomb.mp3"); 
     GreenfootImage[] idleRight = new GreenfootImage[8];
     GreenfootImage[] idleLeft = new GreenfootImage[8];
     // our elephant is facing ...
     String facing = "right";
     SimpleTimer animationTimer = new SimpleTimer();
+    public int speed = 2;
     /**
      * Constructor - The code that gets run one time when object is created
      */
@@ -63,25 +65,25 @@ public class Elephant extends Actor
         // Add your action code here.
         if(Greenfoot.isKeyDown("left"))
         {
-            move(-2);
+            move(-speed);
             facing = "left";
         }
         else if(Greenfoot.isKeyDown("right"))
         {
-            move(2);
+            move(speed);
             facing = "right";
         }
         
         // Remove apple if elephant eats the apple
-        eat();
-        
+        eatApple();
+        eatBomb();
         // Animate
         animateElephant();
     }
     /**
      * Eat the apple and spawn a new apple
      */
-    public void eat()
+    public void eatApple()
     {
         if(isTouching(Apple.class))
         {
@@ -94,5 +96,18 @@ public class Elephant extends Actor
 
         }
     }
+    public void eatBomb()
+    {
+        if(isTouching(Bomb.class))
+        {
+            bombSound.play();
+            removeTouching(Bomb.class);
+            MyWorld world = (MyWorld) getWorld();
+            world.gameOver();
+            world.removeObject(this); 
+        }
+    }
     
 }
+    
+

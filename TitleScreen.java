@@ -29,8 +29,13 @@ public class TitleScreen extends World
         // Start the game if user presses the space bar
         if(Greenfoot.isKeyDown("space"))
         {
-            MyWorld gameWorld = new MyWorld();
-            Greenfoot.setWorld(gameWorld);
+            MyWorld World = new MyWorld();
+            Greenfoot.setWorld(World);
+        }
+        else
+        {
+            MyWorld World = new MyWorld();
+            Greenfoot.setWorld(World);
         }
     }
     
@@ -43,7 +48,7 @@ public class TitleScreen extends World
         Elephant elephant = new Elephant();
         addObject(elephant,497,87);
         elephant.setLocation(109,105);
-        Label label = new Label("Press <SPACE> to Begin!", 60);
+        Label label = new Label("Press <RUN> to Begin!", 60);
         addObject(label,253,184);
         Label label2 = new Label("Use \u2190 and \u2192 to Eat      !", 60);
         addObject(label2,296,309);
